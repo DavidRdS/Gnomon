@@ -1,0 +1,309 @@
+/*
+ * Arquivo de Estilos Principal para o Projeto Gnomon
+ * Versão: 1.2
+ * Data da Última Modificação: 15 de setembro de 2025
+ * Autor: Equipe Gnomon (com assistência de IA)
+ * Descrição: Este arquivo contém todos os estilos para a página de introdução, 
+ * incluindo a lógica de temas (dark/light) e a responsividade.
+*/
+
+/* ==========================================================================
+   1. ESTILOS GLOBAIS E VARIÁVEIS DE TEMA (ROOT)
+   ========================================================================== */
+:root {
+    /* Tema Escuro (Padrão) */
+    --cor-fundo: #1A1A1A;
+    --cor-fundo-secundaria: #2a2a2a;
+    --cor-texto: #f0f0f0;
+    --cor-texto-secundario: #ccc;
+    --cor-destaque: #D4AF37;
+    --cor-destaque-hover: #b89a31;
+    --cor-overlay-fundo: rgba(0, 0, 0, 0.7); /* Overlay para o Hero */
+}
+
+body.light-mode {
+    /* Tema Claro */
+    --cor-fundo: #ffffff;
+    --cor-fundo-secundaria: #f0f0f0;
+    --cor-texto: #1A1A1A;
+    --cor-texto-secundario: #555;
+    --cor-destaque: #007bff;
+    --cor-destaque-hover: #0056b3;
+    --cor-overlay-fundo: rgba(0, 0, 0, 0.5); /* Overlay mais claro para o tema light */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+section {
+     padding: 80px 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 60px;
+}
+
+/* ==========================================================================
+   2. COMPONENTES REUTILIZÁVEIS (Botões, etc.)
+   ========================================================================== */
+.cta-button {
+    background-color: var(--cor-destaque);
+    color: #1A1A1A; /* Cor fixa para garantir contraste em ambos os temas */
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background-color: var(--cor-destaque-hover);
+}
+
+/* ==========================================================================
+   3. CABEÇALHO E NAVEGAÇÃO (HEADER)
+   ========================================================================== */
+header {
+    background: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-bottom 0.3s ease;
+}
+
+body.light-mode header {
+     background: rgba(255, 255, 255, 0.5);
+     border-bottom: 1px solid #ddd;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- Estilo para o Logo (imagem + texto) --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.imagem-perfil {
+    width: 50px;           /* 1. Defina uma largura */
+    height: 50px;          /* 2. Defina uma altura IGUAL à largura */
+    border-radius: 50%;     /* 3. A mágica acontece aqui! */
+    
+    /* Bônus: Garante que a imagem preencha o espaço sem distorcer */
+    object-fit: cover;      
+}
+
+.logo img {
+    height: 50px;
+}
+
+.logo span {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--cor-texto);
+}
+
+/* --- Container da Navegação à Direita --- */
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* AJUSTADO: Aumenta o espaço entre o seletor e o botão */
+}
+
+/* --- Sub-seção: Seletor de Tema --- */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço INTERNO do seletor (entre sol, switch e lua) */
+}
+
+/* ADICIONADO: Estilo explícito para os ícones de sol e lua */
+.theme-switcher i {
+    font-size: 1.1em;
+    color: var(--cor-texto-secundario);
+    transition: color 0.3s ease;
+}
+
+.theme-switch-wrapper {
+    position: relative;
+}
+.theme-switch {
+    width: 50px;
+    height: 26px;
+    background: #555;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.theme-switch-checkbox {
+    display: none;
+}
+.slider {
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+.theme-switch-checkbox:checked + .theme-switch .slider {
+    transform: translateX(23px);
+}
+body.light-mode .theme-switch {
+    background: #ccc;
+}
+
+/* ==========================================================================
+   4. SEÇÕES DA PÁGINA (HERO, FEATURES, ABOUT, TEAM, CTA)
+   ========================================================================== */
+
+/* --- Seção Hero (Principal) --- */
+#hero {
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px;
+    position: relative;
+    color: #fff;
+
+    /* ATENÇÃO: Use o nome correto do seu arquivo de imagem de fundo */
+    background: url('unnamed (1).png') no-repeat center center/cover;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-overlay-fundo);
+    z-index: 1;
+}
+
+#hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+#hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+}
+
+#hero p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    color: #f0f0f0;
+}
+
+/* --- Seção Features (Vantagens) --- */
+#features {
+    background-color: var(--cor-fundo-secundaria);
+    transition: background-color 0.3s ease;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+.feature-item { text-align: center; }
+.feature-item i { font-size: 3em; color: var(--cor-destaque); margin-bottom: 20px; }
+.feature-item h3 { font-size: 1.5em; margin-bottom: 10px; }
+.feature-item p { color: var(--cor-texto-secundario); }
+
+/* --- Seção About (Sobre o Projeto) --- */
+#about {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+#about .about-text { flex: 1; }
+#about .about-image { flex: 1; text-align: center; }
+#about .about-image i { font-size: 12em; color: var(--cor-destaque); opacity: 0.5;}
+
+/* --- Seção Team (Equipe) --- */
+#team {
+    background-color: var(--cor-fundo-secundaria);
+    transition: background-color 0.3s ease;
+}
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+.team-member { text-align: center; }
+.team-member .photo { width: 150px; height: 150px; border-radius: 50%; background-color: #555; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; font-size: 3em; }
+.team-member h3 { font-size: 1.3em; }
+.team-member p { color: var(--cor-destaque); }
+
+/* --- Seção Final CTA (Chamada para Ação) --- */
+#final-cta { text-align: center; }
+#final-cta h2 { font-size: 2.2em; margin-bottom: 20px; }
+
+/* ==========================================================================
+   5. RODAPÉ (FOOTER)
+   ========================================================================== */
+footer {
+    background-color: #111;
+    color: var(--cor-texto-secundario);
+    padding-top: 60px;
+}
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.footer-section h3 { font-size: 1.2em; margin-bottom: 15px; color: var(--cor-texto); }
+.footer-section a { color: var(--cor-texto-secundario); text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s ease; }
+.footer-section a:hover { color: var(--cor-destaque); }
+.footer-bottom { text-align: center; padding: 20px 0; border-top: 1px solid #333; }
+
+/* ==========================================================================
+   6. AJUSTES DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 768px) {
+    #hero h1 { font-size: 2.5em; }
+    #hero p { font-size: 1em; }
+    #about { flex-direction: column; }
+    
+    .logo span {
+        display: none; /* Esconde o nome "GNOMON" em telas pequenas */
+    }
+}
