@@ -1,0 +1,219 @@
+/*
+ * Arquivo de Estilos Principal (Compartilhado)
+ * Projeto: Gnomon
+ * Versão: 0.4
+ * Descrição: Contém estilos globais, variáveis de tema, e componentes
+ * reutilizáveis em todo o site (header, footer, botões, etc).
+*/
+
+/* ==========================================================================
+   1. ESTILOS GLOBAIS E VARIÁVEIS DE TEMA (ROOT)
+   ========================================================================== */
+:root {
+    /* Tema Escuro (Padrão) */
+    --cor-fundo: #1A1A1A;
+    --cor-fundo-secundaria: #2a2a2a;
+    --cor-texto: #f0f0f0;
+    --cor-texto-secundario: #ccc;
+    --cor-destaque: #D4AF37;
+    --cor-destaque-hover: #b89a31;
+    --cor-overlay-fundo: rgba(0, 0, 0, 0.7);
+}
+
+body.light-mode {
+    /* Tema Claro */
+    --cor-fundo: #ffffff;
+    --cor-fundo-secundaria: #f0f0f0;
+    --cor-texto: #1A1A1A;
+    --cor-texto-secundario: #555;
+    --cor-destaque: #007bff;
+    --cor-destaque-hover: #0056b3;
+    --cor-overlay-fundo: rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+section {
+     padding: 80px 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 60px;
+}
+
+/* ==========================================================================
+   2. COMPONENTES REUTILIZÁVEIS (Botões, Logos, etc.)
+   ========================================================================== */
+.cta-button {
+    background-color: var(--cor-destaque);
+    color: #1A1A1A;
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background-color: var(--cor-destaque-hover);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-container img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-container span {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--cor-texto);
+}
+
+/* ==========================================================================
+   3. CABEÇALHO E NAVEGAÇÃO (HEADER)
+   ========================================================================== */
+header {
+    background: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-bottom 0.3s ease;
+}
+
+body.light-mode header {
+     background: rgba(255, 255, 255, 0.5);
+     border-bottom: 1px solid #ddd;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-switcher i {
+    font-size: 1.1em;
+    color: var(--cor-texto-secundario);
+    transition: color 0.3s ease;
+}
+
+.theme-switch-wrapper {
+    position: relative;
+}
+
+.theme-switch {
+    width: 50px;
+    height: 26px;
+    background: #555;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-switch-checkbox {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.theme-switch-checkbox:checked + .theme-switch .slider {
+    transform: translateX(23px);
+}
+
+body.light-mode .theme-switch {
+    background: #ccc;
+}
+
+/* ==========================================================================
+   5. RODAPÉ (FOOTER)
+   ========================================================================== */
+footer {
+    background-color: #111;
+    color: var(--cor-texto-secundario);
+    padding-top: 60px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: var(--cor-texto);
+}
+
+.footer-section a {
+    color: var(--cor-texto-secundario);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--cor-destaque);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #333;
+}
