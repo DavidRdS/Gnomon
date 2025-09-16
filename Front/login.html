@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gnomon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="gnomon-logo-icon.png" alt="Ícone do Gnomon">
+                <h1>Acessar Plataforma</h1>
+            </div>
+            
+            <form action="app.html" method="POST">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Sua senha" required>
+                    <i class="fas fa-eye password-toggle-icon" id="password-toggle"></i>
+                </div>
+
+                <div class="options-group">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Lembrar-me</label>
+                    </div>
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="cta-button login-button">Entrar</button>
+
+                <div class="signup-link">
+                    <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

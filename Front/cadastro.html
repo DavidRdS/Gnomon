@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Gnomon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="gnomon-logo-icon.png" alt="Ícone do Gnomon">
+                <h1>Criar Conta</h1>
+            </div>
+            
+            <form action="login.html" method="POST">
+                <div class="input-group">
+                    <label for="username">Nome Completo</label>
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="username" name="username" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Crie uma Senha</label>
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Mínimo de 8 caracteres" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirm-password">Confirme a Senha</label>
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Repita a senha" required>
+                </div>
+
+                <button type="submit" class="cta-button login-button">Cadastrar</button>
+
+                <div class="signup-link">
+                    <p>Já tem uma conta? <a href="login.html">Faça o login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="cadastro.js"></script>
+</body>
+</html>
