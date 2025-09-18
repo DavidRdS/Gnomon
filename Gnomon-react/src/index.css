@@ -17,7 +17,7 @@
     --cor-texto-secundario: #ccc;
     --cor-destaque: #D4AF37;
     --cor-destaque-hover: #b89a31;
-    --cor-overlay-fundo: rgba(0, 0, 0, 0.7);
+    --cor-overlay-fundo: rgba(0, 0, 0, 0.6);
 }
 
 body.light-mode {
@@ -28,7 +28,7 @@ body.light-mode {
     --cor-texto-secundario: #555;
     --cor-destaque: #007bff;
     --cor-destaque-hover: #0056b3;
-    --cor-overlay-fundo: rgba(0, 0, 0, 0.5);
+    --cor-overlay-fundo: rgba(0, 0, 0, 0.6);
 }
 
 * {
