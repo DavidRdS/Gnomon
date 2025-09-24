@@ -71,7 +71,7 @@ export default function LoginPage() {
                             <input type="checkbox" id="remember" name="remember" />
                             <label htmlFor="remember">Lembrar-me</label>
                         </div>
-                        <a href="#">Esqueceu a senha?</a>
+                        <Link to="/esqueceu-senha">Esqueceu a senha?</Link>
                     </div>
 
                     <button type="submit" className="cta-button login-button">Entrar</button>

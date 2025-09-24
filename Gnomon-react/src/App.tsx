@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import CadastroPage from './pages/CadastroPage';
 import MapaPage from './pages/MapaPage';
+import PerfilPage from './pages/PerfilPage';
+import EsqueceuSenhaPage from './pages/EsqueceuSenhaPage';
 
 function App() {
   return (
@@ -25,6 +27,12 @@ function App() {
         
         {/* Rota para a página do mapa */}
         <Route path="/mapa" element={<MapaPage />} />
+
+        {/* Rota para a página de perfil */}
+        <Route path="/perfil" element={<PerfilPage />} />
+
+        {/* Rota para a página de esqueceu senha */}
+        <Route path="/esqueceu-senha" element={<EsqueceuSenhaPage />} />
       </Routes>
     </BrowserRouter>
   );

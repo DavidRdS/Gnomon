@@ -1,12 +1,22 @@
 // src/pages/MapaPage.tsx
 
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoIcon from '../assets/Gnomon Logo _ SEM NOME.png';
 
-// Crie um arquivo MapaPage.css e cole o conteúdo do seu antigo CSS/mapa.css nele
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+
 import './MapaPage.css';
 
 export default function MapaPage() {
+    const [activeNav, setActiveNav] = useState('Mapa');
+
+    // ==========================================================================
+    //  COORDENADAS PRECISAS ATUALIZADAS CONFORME SUA SELEÇÃO
+    // ==========================================================================
+    const position: [number, number] = [-8.302728, -35.991291];
+
     return (
         <div id="map-app-container">
             <header className="top-bar">
@@ -15,7 +25,9 @@ export default function MapaPage() {
                     <img src={logoIcon} alt="Ícone Gnomon" />
                     <span>GNOMON</span>
                 </Link>
-                <i className="fa-solid fa-circle-user profile-icon"></i>
+                <Link to="/perfil">
+                    <i className="fa-solid fa-circle-user profile-icon"></i>
+                </Link>
             </header>
 
             <main className="content-area">
@@ -25,15 +37,47 @@ export default function MapaPage() {
                 </div>
                 
                 <div id="map-container">
-                    <div className="map-placeholder">
-                        <i className="fa-regular fa-map"></i>
-                        <p>O mapa interativo será carregado aqui...</p>
-                    </div>
+                    <MapContainer center={position} zoom={18} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+
+                        {/* Marcador principal na localização exata que você definiu */}
+                        <Marker position={position}>
+                            <Popup>
+                                <b>Ponto Central do Campus</b> <br/> Entrada do Campus da Uninassau.
+                            </Popup>
+                        </Marker>
+
+                        {/* Futuramente, você pode adicionar outros marcadores para locais específicos
+                          usando o mesmo método para obter as coordenadas de cada um.
+                          Exemplo:
+                          <Marker position={[-8.30250, -35.99150]}>
+                            <Popup>Bloco B</Popup>
+                          </Marker> 
+                        */}
+                    </MapContainer>
                 </div>
             </main>
 
             <footer className="bottom-nav">
-                {/* ... conteúdo da barra de navegação ... */}
+                <div className={`nav-item ${activeNav === 'Mapa' ? 'active' : ''}`} onClick={() => setActiveNav('Mapa')}>
+                    <i className="fa-solid fa-map-location-dot"></i>
+                    <span>Mapa</span>
+                </div>
+                <div className={`nav-item ${activeNav === 'Locais' ? 'active' : ''}`} onClick={() => setActiveNav('Locais')}>
+                    <i className="fa-solid fa-list-ul"></i>
+                    <span>Locais</span>
+                </div>
+                <div className={`nav-item ${activeNav === 'Favoritos' ? 'active' : ''}`} onClick={() => setActiveNav('Favoritos')}>
+                    <i className="fa-solid fa-star"></i>
+                    <span>Favoritos</span>
+                </div>
+                <div className={`nav-item ${activeNav === 'Ajustes' ? 'active' : ''}`} onClick={() => setActiveNav('Ajustes')}>
+                    <i className="fa-solid fa-gear"></i>
+                    <span>Ajustes</span>
+                </div>
             </footer>
         </div>
     );
