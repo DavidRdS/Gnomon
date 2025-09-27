@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logoIcon from '../assets/Gnomon Logo _ SEM NOME.png';
-
+import logoIcon from '../../assets/Gnomon Logo _ SEM NOME.png';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 

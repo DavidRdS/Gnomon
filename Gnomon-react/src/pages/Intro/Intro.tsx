@@ -1,13 +1,15 @@
 // src/pages/HomePage.tsx
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import CtaButton from '../components/CtaButton';
-
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import CtaButton from '../../components/CtaButton';
+import fotoLucas from '../../assets//Lucas.jpg';
+import fotoDavid from '../../assets/David.jpg';
+import fotoJoao from '../../assets/Joao.jpg';
 // Importa os estilos específicos para esta página
-import './HomePage.css';
+import './Intro.css';
 
-export default function HomePage() {
+export default function Intro() {
     return (
         // Usamos um Fragment (<>) para agrupar os elementos sem adicionar um div extra
         <>
@@ -39,9 +41,9 @@ export default function HomePage() {
                                 <p>Nossa principal missão é resolver a dificuldade de localização no ambiente acadêmico. Encontre qualquer ponto do campus de forma intuitiva.</p>
                             </div>
                             <div className="feature-item">
-                                <i className="fa-solid fa-wifi-slash"></i>
-                                <h3>Acesso Offline</h3>
-                                <p>O sinal de Wi-Fi é instável? Sem problemas. O Gnomon funciona offline, garantindo seu acesso ao mapa a qualquer momento.</p>
+                                <i className="fa fa-blind"></i>
+                                <h3>Descrição e Ajuda</h3>
+                                <p>Já se sentiu perdido na área? Cola com a gente que é sucesso.</p>
                             </div>
                             <div className="feature-item">
                                 <i className="fa-solid fa-mobile-screen-button"></i>
@@ -69,17 +71,17 @@ export default function HomePage() {
                         <h2>Nossa Equipe</h2>
                         <div className="team-grid">
                             <div className="team-member">
-                                <div className="photo"><i className="fas fa-user"></i></div>
+                                <div className="photo"><img src={fotoLucas} alt="Lucas Hiago" /></div>
                                 <h3>Lucas Hiago</h3>
                                 <p>Desenvolvedor & Testes</p>
                             </div>
                             <div className="team-member">
-                                <div className="photo"><i className="fas fa-user"></i></div>
+                                <div className="photo"><img src={fotoDavid} alt="David Roberto" /></div>
                                 <h3>David Roberto</h3>
-                                <p>Desenvolvedor Frontend</p>
+                                <p>Desenvolvedor & Banco de Dados</p>
                             </div>
                             <div className="team-member">
-                                <div className="photo"><i className="fas fa-user"></i></div>
+                                <div className="photo"><img src={fotoJoao} alt="João Marcos" /></div>
                                 <h3>João Marcos</h3>
                                 <p>Gerente & Desenvolvedor</p>
                             </div>

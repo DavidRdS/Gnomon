@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logoIcon from '../assets/Gnomon Logo _ SEM NOME.png';
+import logoIcon from '../../assets/Gnomon Logo _ SEM NOME.png';
 
 // Supondo que você criou e importou o CSS
-import './LoginPage.css'; 
+import './CadastroPage.css'; 
 
 export default function CadastroPage() {
     // Hooks para controlar o estado dos campos do formulário

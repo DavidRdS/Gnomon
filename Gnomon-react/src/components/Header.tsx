@@ -1,65 +1,81 @@
 // src/components/Header.tsx
 
-// Importa as funcionalidades necessárias do React
+/**
+ * Importações de dependências.
+ * useState e useEffect são Hooks do React para gerenciamento de estado e efeitos colaterais.
+ * Link é um componente do react-router-dom para navegação client-side.
+ * logoIcon é um asset estático (imagem) importado para uso no componente.
+ */
 import { useState, useEffect } from 'react';
-// Importa o componente Link para navegação sem recarregar a página
 import { Link } from 'react-router-dom';
-// Importa a imagem do logo da pasta de assets
 import logoIcon from '../assets/Gnomon Logo _ SEM NOME.png';
 
-// Define o componente Header
+/**
+ * @component Header
+ * @description Renderiza o cabeçalho principal da aplicação, incluindo o logo,
+ * o seletor de tema (dark/light) e o botão de navegação principal.
+ */
 export default function Header() {
-    // Cria um "estado" para controlar o tema atual.
-    // O valor inicial é pego do localStorage ou 'dark' como padrão.
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+    /**
+     * Estado para gerenciar o tema atual ('dark' ou 'light').
+     * O valor inicial é recuperado do localStorage para persistir a escolha do usuário.
+     * Se nenhum tema estiver salvo, o padrão é 'dark'.
+     */
+    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'dark');
 
-    // useEffect é um "efeito colateral" que roda quando o componente é montado
-    // ou quando uma de suas dependências (no caso, a variável 'theme') muda.
+    /**
+     * Efeito colateral (useEffect) que monitora mudanças na variável de estado 'theme'.
+     * É executado uma vez na montagem do componente e sempre que o estado 'theme' é atualizado.
+     * Sua função é aplicar a classe 'light-mode' ao `<body>` e salvar a preferência
+     * do usuário no localStorage.
+     */
     useEffect(() => {
-        // Aplica ou remove a classe 'light-mode' do body
-        if (theme === 'light') {
-            document.body.classList.add('light-mode');
-        } else {
-            document.body.classList.remove('light-mode');
-        }
-        // Salva a preferência do tema no localStorage para visitas futuras
+        const bodyClass = document.body.classList;
+        theme === 'light' ? bodyClass.add('light-mode') : bodyClass.remove('light-mode');
         localStorage.setItem('theme', theme);
-    }, [theme]); // O array de dependências garante que este código só rode quando 'theme' mudar
+    }, [theme]);
 
-    // Função que é chamada quando o interruptor do tema é alterado
+    /**
+     * Manipulador de evento para o interruptor de tema.
+     * Atualiza o estado 'theme' com base no estado 'checked' do input checkbox.
+     * @param {React.ChangeEvent<HTMLInputElement>} e - O evento de mudança do input.
+     */
     const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTheme(e.target.checked ? 'light' : 'dark');
     };
 
-    // A parte "return" contém o JSX, que é o nosso "HTML" do componente
+    /**
+     * A renderização do componente em JSX.
+     * Retorna a estrutura do cabeçalho, conectando os estados e manipuladores de evento
+     * aos elementos da interface.
+     */
     return (
         <header>
             <div className="container">
-                {/* O Link com to="/" leva para a página inicial */}
                 <Link to="/" className="logo-container">
                     <img src={logoIcon} alt="Ícone do Gnomon" />
                     <span>GNOMON</span>
                 </Link>
                 <nav>
                     <div className="theme-switcher">
-                        <i className="fas fa-sun"></i>
+                        <i className="fas fa-moon"></i>
                         <label className="theme-switch-wrapper">
                             <input 
                                 type="checkbox" 
                                 id="theme-switcher" 
                                 className="theme-switch-checkbox"
-                                // O estado do checkbox é controlado pela variável 'theme'
+                                // O estado visual do interruptor é controlado pelo estado 'theme'.
                                 checked={theme === 'light'}
-                                // A função handleThemeChange é chamada a cada clique
+                                // O evento onChange dispara a função de mudança de tema.
                                 onChange={handleThemeChange}
                             />
                             <div className="theme-switch">
                                 <div className="slider"></div>
                             </div>
                         </label>
-                        <i className="fas fa-moon"></i>
+                        <i className="fas fa-sun"></i>
                     </div>
-                    {/* O Link com to="/login" leva para a página de login */}
+                    {/* O componente Link renderiza um <a>, mas gerencia a navegação via JavaScript, sem recarregar a página. */}
                     <Link to="/login" className="cta-button">Abrir Guia</Link>
                 </nav>
             </div>

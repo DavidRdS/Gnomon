@@ -16,7 +16,7 @@
     position: relative;
     color: #fff;
     /* CORRIGIDO: Caminho da imagem ajustado para a pasta assets */
-    background: url('../assets/unnamed (1).png') no-repeat center center/cover;
+    background: url('../../assets/Mapa.png') no-repeat center center/cover;
 }
 
 #hero::before {
@@ -134,4 +134,11 @@
     .logo-container span {
         display: none; /* Esconde o nome "GNOMON" em telas pequenas */
     }
+}
+/* FOTO DOS MEMBROS DA EQUIPE */
+.team-member .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Essencial para não distorcer a foto */
+    border-radius: 50%; /* Garante que a imagem em si também seja redonda */
 }

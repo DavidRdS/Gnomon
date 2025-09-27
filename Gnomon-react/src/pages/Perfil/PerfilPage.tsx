@@ -2,7 +2,7 @@
 
 import { Link, useNavigate } from 'react-router-dom';
 // Vamos usar uma imagem de placeholder para a foto de perfil por enquanto
-import placeholderAvatar from '../assets/Gnomon Logo _ SEM NOME.png'; 
+import placeholderAvatar from '../../assets/Gnomon Logo _ SEM NOME.png';
 // Importa os estilos que acabamos de criar
 import './PerfilPage.css'; 
 

@@ -2,9 +2,7 @@
 
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logoIcon from '../assets/Gnomon Logo _ SEM NOME.png';
-
-// Importa os estilos específicos que acabamos de criar
+import logoIcon from '../../assets/Gnomon Logo _ SEM NOME.png';// Importa os estilos específicos que acabamos de criar
 import './EsqueceuSenhaPage.css'; 
 
 export default function EsqueceuSenhaPage() {

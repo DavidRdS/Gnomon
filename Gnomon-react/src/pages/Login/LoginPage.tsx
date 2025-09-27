@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logoIcon from '../assets/Gnomon Logo _ SEM NOME.png';
-
+import logoIcon from '../../assets/Gnomon Logo _ SEM NOME.png';
 // Importe o CSS específico do login
 // Crie um arquivo LoginPage.css e cole o conteúdo do seu antigo CSS/login.css nele
 import './LoginPage.css'; 
