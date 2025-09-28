@@ -1,0 +1,79 @@
+// Define a fonte de dados. Usaremos SQLite, um banco de dados simples baseado em arquivo.
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// Define o gerador de cliente, que cria o código TypeScript para interagirmos com o banco.
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ==========================================================================
+//  MODELOS BASEADOS NO SEU DIAGRAMA CONCEITUAL
+// ==========================================================================
+
+// Modelo para os Usuários do aplicativo
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String   // A senha será armazenada de forma criptografada
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relação: Um usuário pode ter vários locais favoritados (opcional, para o futuro)
+  // favoriteLocals Local[]
+
+  @@map("usuarios")
+}
+
+// Modelo para os Locais (salas, banheiros, laboratórios, etc.)
+model Local {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?  // O '?' indica que este campo é opcional
+  coordinates String   // Ex: "-8.3027, -35.9912"
+  type        String   // Ex: "Sala de Aula", "Banheiro", "Laboratório"
+  iconUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relação: Um local pertence a um mapa
+  mapId       Int
+  map         Map      @relation(fields: [mapId], references: [id])
+
+  // Relação: Um local pode estar em várias rotas
+  routes      Route[]
+
+  @@map("locais")
+}
+
+// Modelo para os Mapas (que representam as plantas baixas dos andares)
+model Map {
+  id        Int      @id @default(autoincrement())
+  name      String   // Ex: "1º Andar - Bloco A"
+  imageUrl  String   // URL da imagem da planta baixa
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relação: Um mapa contém vários locais
+  locals    Local[]
+
+  @@map("mapas")
+}
+
+// Modelo para as Rotas (os caminhos que conectam os locais)
+model Route {
+  id        Int      @id @default(autoincrement())
+  name      String
+  // Para simplificar, podemos armazenar os pontos da rota como um texto JSON
+  pathData  String   // Ex: "[[-8.302, -35.991], [-8.303, -35.992]]"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relação: Uma rota é composta por vários locais
+  locals    Local[]
+
+  @@map("rotas")
+}
