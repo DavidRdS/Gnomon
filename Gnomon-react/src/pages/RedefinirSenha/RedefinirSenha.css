@@ -130,13 +130,3 @@ body.light-mode .input-group input:focus {
     text-decoration: none;
     font-weight: 600;
 }
-/* Estilo para a mensagem de erro */
-.error-message {
-    color: #ff6b6b; /* Um tom de vermelho */
-    background-color: rgba(255, 107, 107, 0.1);
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 20px;
-    border: 1px solid #ff6b6b;
-}

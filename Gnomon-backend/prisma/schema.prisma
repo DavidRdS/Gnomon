@@ -9,23 +9,22 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// ==========================================================================
-//  MODELOS BASEADOS NO SEU DIAGRAMA CONCEITUAL
-// ==========================================================================
-
 // Modelo para os Usuários do aplicativo
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String
-  password  String   // A senha será armazenada de forma criptografada
+  password  String
+
+  // Campos para reset de senha
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relação: Um usuário pode ter vários locais favoritados (opcional, para o futuro)
-  // favoriteLocals Local[]
-
   @@map("usuarios")
+  @@index([passwordResetToken])
 }
 
 // Modelo para os Locais (salas, banheiros, laboratórios, etc.)

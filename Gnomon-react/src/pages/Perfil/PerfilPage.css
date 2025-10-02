@@ -3,6 +3,20 @@
  * Projeto: Gnomon
  * Descrição: Contém estilos para a visualização do perfil do usuário.
 */
+.profile-email {
+    /* ... */
+    margin-bottom: 10px; /* Diminuído para dar espaço para a data */
+}
+
+/* ESTILO NOVO PARA A DATA DE CRIAÇÃO */
+.profile-joindate {
+    font-size: 0.9em;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+/* Removido conjunto de regras vazio para .profile-actions */
 
 .profile-container {
     display: flex;

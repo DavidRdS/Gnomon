@@ -4,26 +4,58 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoIcon from '../../assets/Gnomon Logo _ SEM NOME.png';
 
-// Supondo que você criou e importou o CSS
+// Importa os estilos da página (certifique-se que o arquivo existe)
 import './CadastroPage.css'; 
 
 export default function CadastroPage() {
     // Hooks para controlar o estado dos campos do formulário
-    const [nome, setNome] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
+    // Função handleSubmit atualizada para se comunicar com o back-end
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault(); // Impede o recarregamento da página
+
+        // Validação no front-end: verifica se as senhas coincidem
         if (password !== confirmPassword) {
             alert('As senhas não coincidem!');
             return;
         }
-        console.log('Criando conta para:', { nome, email, password });
-        alert('Cadastro realizado com sucesso! Faça o login para continuar.');
-        navigate('/login');
+
+        // 1. Monta o objeto de dados para enviar para a API
+        const userData = { name, email, password };
+
+        try {
+            // 2. Faz a requisição 'fetch' para o endpoint de registro do back-end
+            const response = await fetch('http://localhost:3001/api/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            // 3. Converte a resposta do back-end
+            const responseData = await response.json();
+
+            // 4. Verifica se a resposta da API indica um erro
+            if (!response.ok) {
+                // Lança um erro com a mensagem vinda do back-end (ex: "E-mail já em uso")
+                throw new Error(responseData.message || 'Falha ao cadastrar.');
+            }
+            
+            // 5. Se o cadastro foi bem-sucedido, avisa o usuário e o redireciona para o login
+            alert('Cadastro realizado com sucesso! Faça o login para continuar.');
+            navigate('/login');
+
+        } catch (error: any) {
+            // 6. Captura qualquer erro (de rede ou da API) e o exibe para o usuário
+            console.error('Erro no cadastro:', error);
+            alert(`Erro no cadastro: ${error.message}`);
+        }
     };
 
     return (
@@ -41,15 +73,14 @@ export default function CadastroPage() {
                         <label htmlFor="username">Nome Completo</label>
                         <i className="fas fa-user input-icon"></i>
                         <input type="text" id="username" placeholder="Seu nome completo" required 
-                            value={nome} 
-                            onChange={(e) => setNome(e.target.value)} />
+                            value={name} 
+                            onChange={(e) => setName(e.target.value)} />
                     </div>
 
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <i className="fas fa-envelope input-icon"></i>
                         <input type="email" id="email" placeholder="seuemail@exemplo.com" required 
-                            // CORRIGIDO AQUI:
                             value={email}
                             onChange={(e) => setEmail(e.target.value)} />
                     </div>
@@ -58,7 +89,6 @@ export default function CadastroPage() {
                         <label htmlFor="password">Crie uma Senha</label>
                         <i className="fas fa-lock input-icon"></i>
                         <input type="password" id="password" placeholder="Mínimo de 8 caracteres" required 
-                            // CORRIGIDO AQUI:
                             value={password}
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
@@ -67,7 +97,6 @@ export default function CadastroPage() {
                         <label htmlFor="confirm-password">Confirme a Senha</label>
                         <i className="fas fa-lock input-icon"></i>
                         <input type="password" id="confirm-password" placeholder="Repita a senha" required 
-                            // CORRIGIDO AQUI:
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>

@@ -8,6 +8,7 @@ import CadastroPage from './pages/Cadastro/CadastroPage';
 import MapaPage from './pages//Mapa/MapaPage';
 import PerfilPage from './pages//Perfil/PerfilPage';
 import EsqueceuSenhaPage from './pages//EsqueceuSenha/EsqueceuSenhaPage';
+import RedefinirSenhaPage from './pages/RedefinirSenha/RedefinirSenha';
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
 
         {/* Rota para a página de esqueceu senha */}
         <Route path="/esqueceu-senha" element={<EsqueceuSenhaPage />} />
+        
+        {/* Rota para a página de redefinir senha */}
+        <Route path="/reset-password" element={<RedefinirSenhaPage />} />
+
       </Routes>
     </BrowserRouter>
   );
