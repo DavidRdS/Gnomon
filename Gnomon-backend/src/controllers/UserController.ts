@@ -8,7 +8,7 @@ import { randomBytes, createHash } from 'crypto';
 
 const prisma = new PrismaClient();
 
-// Interface para estender o objeto Request do Express
+// Interface para estender o objeto Request do Express e adicionar a propriedade 'user'
 interface AuthRequest extends Request {
   user?: { userId: number };
 }
@@ -101,7 +101,14 @@ export const loginUser = async (req: Request, res: Response): Promise<Response> 
       { expiresIn: '24h' }
     );
 
-    return res.status(200).json({ token });
+    return res.status(200).json({
+        token,
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        }
+    });
 
   } catch (error: any) {
     if (error instanceof z.ZodError) {
@@ -154,14 +161,14 @@ export const forgotPassword = async (req: Request, res: Response): Promise<Respo
     });
 
     await transporter.sendMail({
-      from: `"Gnomon App" <${process.env.EMAIL_USER}>`,
+      from: `"Seu App" <${process.env.EMAIL_USER}>`,
       to: user.email,
-      subject: 'Recuperação de Senha - Gnomon',
+      subject: 'Recuperação de Senha',
       html: `
         <h1>Recuperação de Senha</h1>
         <p>Olá, ${user.name}!</p>
         <p>Clique no link para redefinir sua senha (expira em 30 minutos):</p>
-        <a href="${resetLink}" target="_blank" style="padding: 10px 15px; background-color: #D4AF37; color: #1A1A1A; text-decoration: none; border-radius: 5px;">Redefinir Senha</a>
+        <a href="${resetLink}" target="_blank" style="padding: 10px 15px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Redefinir Senha</a>
         <p>Se você não solicitou isso, ignore este e-mail.</p>
       `,
     });

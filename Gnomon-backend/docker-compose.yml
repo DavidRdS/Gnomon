@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:16
+    container_name: gnomon-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: gnomon
+      POSTGRES_PASSWORD: gnomon
+      POSTGRES_DB: gnomon
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

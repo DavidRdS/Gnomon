@@ -1,13 +1,12 @@
 // src/App.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// 1. Importa TODOS os componentes que representam cada página
 import HomePage from './pages/Intro/Intro';
 import LoginPage from './pages/Login/LoginPage';
 import CadastroPage from './pages/Cadastro/CadastroPage';
-import MapaPage from './pages//Mapa/MapaPage';
-import PerfilPage from './pages//Perfil/PerfilPage';
-import EsqueceuSenhaPage from './pages//EsqueceuSenha/EsqueceuSenhaPage';
+import MapaPage from './pages/Mapa/MapaPage';
+import PerfilPage from './pages/Perfil/PerfilPage';
+import EsqueceuSenhaPage from './pages/EsqueceuSenha/EsqueceuSenhaPage';
 import RedefinirSenhaPage from './pages/RedefinirSenha/RedefinirSenha';
 
 function App() {
@@ -34,8 +33,11 @@ function App() {
 
         {/* Rota para a página de esqueceu senha */}
         <Route path="/esqueceu-senha" element={<EsqueceuSenhaPage />} />
-        
+
         {/* Rota para a página de redefinir senha */}
+        <Route path="/RedefinirSenha" element={<RedefinirSenhaPage />} />
+
+        {/* Rota para a página de redefinir senha (alias) */}
         <Route path="/reset-password" element={<RedefinirSenhaPage />} />
 
       </Routes>
