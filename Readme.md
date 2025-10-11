@@ -1,3 +1,5 @@
+Segue o conteúdo pronto para salvar como README.md.
+
 # Gnomon — Navegação e Integração no Campus
 
 > PWA para orientar alunos e visitantes no campus, com mapa interativo, catálogo de locais e autenticação.
@@ -12,17 +14,17 @@
 
 ---
 
-## Sumário
+## 📋 Sumário
 - [Visão Geral](#visão-geral)
 - [Justificativa](#justificativa)
 - [Solução Técnica (PWA)](#solução-técnica-pwa)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias e Arquitetura](#tecnologias-e-arquitetura)
-- [Como Rodar (dev)](#como-rodar-dev)
-- [Variáveis de Ambiente](#variáveis-de-ambiente)
-- [Banco de Dados e Prisma](#banco-de-dados-e-prisma)
-- [Swagger (Documentação)](#swagger-documentação)
-- [Escopo](#escopo)
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias e Arquitetura](#-tecnologias-e-arquitetura)
+- [🚀 Como Rodar (Ambiente de Desenvolvimento)](#-como-rodar-ambiente-de-desenvolvimento)
+- [🔧 Variáveis de Ambiente](#-variáveis-de-ambiente)
+- [🗃️ Banco de Dados e Prisma](#-banco-de-dados-e-prisma)
+- [📖 Swagger (Documentação da API)](#-swagger-documentação-da-api)
+- [Escopo do Projeto](#escopo-do-projeto)
 - [Modelo de Negócio (Futuro)](#modelo-de-negócio-futuro)
 - [Equipe](#equipe)
 - [Licença](#licença)
@@ -39,145 +41,231 @@ O nome “Gnomon” reflete sua função: atuar como guia confiável, tal qual o
 ## Justificativa
 A transição para a universidade traz desafios além da localização: gestão de tempo, carga de disciplinas e pressão pessoal. A dificuldade inicial em se orientar no campus agrava esses problemas e consome energia que poderia ser dedicada às demandas acadêmicas e sociais.
 
-- Campus como “labirinto” para recém-chegados.
-- 66,4% dos estudantes relataram falta de informações essenciais (assistência estudantil, saúde, serviços administrativos).
+- O campus pode ser um verdadeiro “labirinto” para recém-chegados.
+- Uma pesquisa indicou que 66,4% dos estudantes relataram falta de informações essenciais (assistência estudantil, saúde, serviços administrativos).
 
-O Gnomon simplifica a navegação, promovendo autonomia e segurança — e acelera a adaptação ao ambiente acadêmico.
+O Gnomon simplifica a navegação, promovendo autonomia e segurança, e acelera a adaptação do usuário ao ambiente acadêmico.
 
 ---
 
 ## Solução Técnica (PWA)
-PWA acessível via navegador, instalável na tela inicial do celular e com experiência semelhante a app nativo.
+A escolha por um PWA torna a solução acessível via navegador, instalável na tela inicial do celular e com uma experiência de uso semelhante a um aplicativo nativo, sem a necessidade de uma loja de aplicativos.
 
-- Acessível em múltiplas plataformas
-- Leve e rápido (Vite + React)
-- Preparado para uso offline (escopo futuro)
-
----
-
-## Funcionalidades
-- Mapa Interativo do Campus
-- Catálogo de Locais com busca e detalhes (salas, banheiros, laboratórios, etc.)
-- UX responsiva e intuitiva (mobile-first)
-- Autenticação (registro, login, perfil)
-- Relacionamento muitos-para-muitos entre Locais e Rotas
-- Documentação da API via Swagger
-
-Futuro:
-- Navegação em tempo real (indoor)
-- Notificações push
-- Integrações com sistemas acadêmicos
-- Analytics e recursos B2B
+- Acessibilidade: Compatível com múltiplas plataformas (iOS, Android, Web).
+- Performance: Leve e rápido, construído com Vite e React.
+- Disponibilidade: Preparado para uso offline (escopo futuro).
 
 ---
 
-## Tecnologias e Arquitetura
-- Frontend: React + Vite + Tailwind CSS (PWA)
-- Backend: Node.js + Express 5 + TypeScript
-- Segurança: Helmet, CORS, Rate Limit
-- Logs: pino-http
-- Banco: PostgreSQL 16 (Docker) — host: 5433
-- ORM: Prisma
-- Documentação: Swagger (swagger-ui-express + swagger-jsdoc)
+## ✨ Funcionalidades
+- Mapa Interativo: Visualização completa do campus com pontos de interesse.
+- Catálogo de Locais: Busca e detalhes de salas, banheiros, laboratórios, etc.
+- UX Intuitiva: Design responsivo e focado na experiência mobile-first.
+- Autenticação: Sistema completo de registro, login e gerenciamento de perfil.
+- Roteirização: Modelo de dados com relacionamento N-N entre Locais e Rotas.
+- Documentação da API: Endpoints documentados com Swagger para fácil consulta.
 
-Portas padrão:
-- Frontend: 5173
-- Backend (API): 3001
-- Postgres (host→container): 5433→5432
+#### Roadmap (Futuro):
+- Navegação em tempo real (indoor navigation).
+- Notificações push para eventos e avisos.
+- Integrações com sistemas acadêmicos (notas, horários).
+- Analytics de fluxo e recursos B2B para a instituição.
 
 ---
 
-## Como Rodar (dev)
+## 🛠️ Tecnologias e Arquitetura
+
+| Camada        | Tecnologia                      | Propósito                                                 |
+| :------------ | :------------------------------ | :-------------------------------------------------------- |
+| Frontend      | React, Vite, Tailwind CSS       | Interface reativa, rápida e estilizada (PWA)              |
+| Backend       | Node.js, Express 5, TypeScript  | API robusta, segura e tipada                              |
+| Segurança     | Helmet, CORS, Rate Limit        | Proteção de headers, controle de acesso e força bruta     |
+| Logs          | pino-http                       | Monitoramento e debugging da API                          |
+| Banco de Dados| PostgreSQL 16 (via Docker)      | Armazenamento persistente e relacional                    |
+| ORM           | Prisma                          | Mapeamento objeto-relacional e migrações                  |
+| Documentação  | Swagger                         | Documentação interativa da API                            |
+
+#### Portas Padrão:
+- Frontend: http://localhost:5173
+- Backend (API): http://localhost:3001
+- PostgreSQL (Host → Container): 5433 → 5432
+
+---
+
+## 🚀 Como Rodar (Ambiente de Desenvolvimento)
 
 Pré-requisitos:
-- Node 18+
+- Node.js v18 ou superior
 - Docker Desktop em execução
 
-1) Banco (Docker)
+### 1) Clone o Repositório
+```bash
+git clone https://github.com/JaoVile/Gnomon.git
+cd Gnomon
+```
+
+### 2) Configure as Variáveis de Ambiente
+Navegue até a pasta do backend, copie o arquivo de exemplo .env.example e renomeie-o para .env.
+
+```bash
+# Navegue até a pasta correta do backend
+cd Gnomon-backend
+cp .env.example .env
+```
+
+Importante: Abra o arquivo .env e preencha as variáveis, especialmente as de JWT_SECRET e EMAIL. Veja a seção “Variáveis de Ambiente” para mais detalhes.
+
+### 3) Inicie o Banco de Dados com Docker
+A partir da raiz do projeto, suba o contêiner do PostgreSQL.
+
 ```bash
 docker compose up -d
-# ver porta mapeada
-docker port gnomon-postgres  # → 0.0.0.0:5433
+```
 
-# na pasta do backend
+Para verificar se o contêiner está rodando e a porta foi mapeada corretamente:
+
+```bash
+docker ps
+# ou
+docker port gnomon-postgres
+```
+
+### 4) Rode as Migrações do Banco
+Com o banco de dados ativo, aplique o schema do Prisma.
+
+```bash
+# Estando na pasta /Gnomon-backend
+npx prisma migrate dev
+```
+
+### 5) Inicie o Backend
+```bash
+# Estando na pasta /Gnomon-backend
 npm install
 npm run dev
-# Health: http://localhost:3001/health
-# Swagger: http://localhost:3001/api/docs
+```
 
-# na pasta do frontend
+O servidor estará rodando. Verifique a saúde da API em:
+- Healthcheck: http://localhost:3001/health
+- Swagger: http://localhost:3001/api/docs
+
+### 6) Inicie o Frontend
+Abra um novo terminal, navegue até a pasta do frontend e execute os comandos:
+
+```bash
+# Exemplo de nome de pasta, ajuste se necessário
+cd ../Gnomon-frontend
 npm install
 npm run dev
-# http://localhost:5173
+```
 
+Pronto! A aplicação estará acessível em http://localhost:5173.
 
-# Variáveis do ambiente
-Arquivo: Gnomon-backend/.env
+---
 
-env
+## 🔧 Variáveis de Ambiente
+O arquivo .env na pasta Gnomon-backend é crucial para o funcionamento da aplicação.
 
+```env
 # Servidor
 PORT=3001
 API_BASE_URL=http://localhost:3001
+
+# URLs do frontend permitidas pelo CORS (separadas por vírgula)
 FRONTEND_URL=http://localhost:5173,http://127.0.0.1:5173
-# Para links públicos (e-mail de reset)
+
+# URL pública para links (ex: e-mail de recuperação de senha)
 FRONTEND_PUBLIC_URL=http://localhost:5173
 
-# Banco (Postgres no Docker, porta 5433 no host)
-DATABASE_URL=postgresql://gnomon:gnomon@localhost:5433/gnomon?schema=public
-DIRECT_DATABASE_URL=postgresql://gnomon:gnomon@localhost:5433/gnomon?schema=public
+# Conexão com o banco de dados (PostgreSQL rodando no Docker)
+DATABASE_URL="postgresql://gnomon:gnomon@localhost:5433/gnomon?schema=public"
+# URL usada diretamente pelo Prisma para migrações
+DIRECT_DATABASE_URL="postgresql://gnomon:gnomon@localhost:5433/gnomon?schema=public"
 
-# Auth / E-mail
-JWT_SECRET=troque_por_um_segredo_forte
-EMAIL_USER=seuemail@gmail.com
-EMAIL_PASS=senha_de_app
+# Autenticação e E-mail
+JWT_SECRET="troque_por_um_segredo_muito_forte_e_aleatorio"
+# E-mail para envio de notificações (ex: recuperação de senha)
+EMAIL_USER="seuemail@gmail.com"
+EMAIL_PASS="sua_senha_de_app_do_gmail"
+```
 
+---
 
-#Banco de Dados e Prisma
+## 🗃️ Banco de Dados e Prisma
+O projeto utiliza PostgreSQL gerenciado pelo Prisma ORM.
 
-Provider: PostgreSQL (Prisma)
-Migrações:
-Bash
+Comandos úteis do Prisma:
 
+- Formatar o schema:
+```bash
 npx prisma format
-npx prisma migrate dev --name sua_mudanca
+```
+
+- Executar uma nova migração:
+```bash
+npx prisma migrate dev --name "nome-da-sua-mudanca"
+```
+
+- Gerar o cliente Prisma após mudanças no schema:
+```bash
 npx prisma generate
-Visualização:
-Bash
+```
 
+- Abrir a UI do Prisma Studio:
+```bash
 npx prisma studio
-pgAdmin (opcional): host localhost, port 5433, db gnomon, user gnomon, pass gnomon.
-Tabelas principais: usuarios, mapas, locais, rotas e a tabela de junção (Local ↔ Route) gerada pelo Prisma.
+```
 
+Acesso via pgAdmin (Opcional):
+- Host: localhost
+- Port: 5433
+- Database: gnomon
+- User: gnomon
+- Password: gnomon
 
-#Swagger (Documentação)
+---
 
-UI: http://localhost:3001/api/docs
-JSON: http://localhost:3001/api/docs.json
-Segurança Bearer JWT configurada (bearerAuth).
-As anotações vivem em src/docs/**/*.ts e em comentários @openapi nas rotas.
+## 📖 Swagger (Documentação da API)
+A documentação completa da API é gerada automaticamente e pode ser acessada de forma interativa.
 
-Escopo
-Incluído:
+- Interface Gráfica (UI): http://localhost:3001/api/docs  
+- Arquivo JSON (definição): http://localhost:3001/api/docs.json
 
-PWA funcional
-Mapeamento e catálogo de locais
-Exibição de informações detalhadas
-Documentação e testes básicos
-Futuro:
+A documentação suporta autenticação Bearer JWT. Para testar rotas protegidas, utilize o botão “Authorize” e insira o token obtido no login.
 
-Navegação em tempo real (GPS indoor)
-Notificações push
-Integração com calendário acadêmico/sistemas da universidade
-Monetização B2B (analytics, painel administrativo)
-Modelo de Negócio (Futuro)
-Pensado para licenciamento B2B (instituições parceiras), não para o usuário final. Possibilidades:
+---
 
-Assinatura institucional
-Recursos premium (analytics, integrações)
-Equipe
-Gestor do Projeto: João Marcos Ferreira Vilela
-Membros: Lucas Hiago de Paulo Barbosa, David Roberto da Silva Sousa
-Patrocinador: Professor Antonio Almeida
-Licença
-Este projeto é licenciado sob a Licença MIT.
+## Escopo do Projeto
+
+O que está incluído (MVP):
+- PWA funcional com as principais funcionalidades.
+- Mapeamento completo e catálogo de locais do campus.
+- Exibição de informações detalhadas e rotas estáticas.
+- Documentação da API e testes básicos.
+
+O que não está incluído (Futuro):
+- Navegação em tempo real (GPS indoor).
+- Notificações push.
+- Integração com sistemas externos (calendário acadêmico, etc.).
+- Modelo de monetização B2B.
+
+---
+
+## Modelo de Negócio (Futuro)
+O Gnomon foi projetado para ser licenciado como uma solução B2B para instituições de ensino e outras organizações com grandes espaços físicos, e não como um produto para o usuário final.
+
+Possibilidades de Monetização:
+- Assinatura institucional (licenciamento de software).
+- Recursos premium (analytics de fluxo, integrações com sistemas legados).
+
+---
+
+## Equipe
+- Gestor do Projeto: João Marcos Ferreira Vilela  
+- Membros: Lucas Hiago de Paulo Barbosa, David Roberto da Silva Sousa  
+- Patrocinador: Professor Antonio Almeida
+
+---
+
+## Licença
+Este projeto é licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
