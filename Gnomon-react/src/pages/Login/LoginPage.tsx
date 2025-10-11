@@ -1,27 +1,63 @@
-// src/pages/LoginPage.tsx
+/**
+ * @file LoginPage.tsx
+ * @description Componente de página para autenticação de usuários.
+ */
 
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoIcon from '../../assets/Gnomon Logo _ SEM NOME.png';
-// Importe o CSS específico do login
-// Crie um arquivo LoginPage.css e cole o conteúdo do seu antigo CSS/login.css nele
 import './LoginPage.css'; 
 
 export default function LoginPage() {
-    // Hooks do React para controlar o estado dos inputs
+    // Estados para controlar os campos do formulário
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    // Hook do React Router para navegar programaticamente
+    // Estados para controlar o feedback da UI
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault(); // Impede o recarregamento da página
-        // Aqui, futuramente, virá a lógica de validação com o back-end
-        console.log('Tentativa de login com:', { email, password });
-        // Simula um login bem-sucedido e navega para a página do mapa
-        navigate('/mapa');
+    /**
+     * Manipula a submissão do formulário de login, enviando os dados para a API
+     * e tratando a resposta.
+     * @param {React.FormEvent} event - O evento de submissão do formulário.
+     */
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        setIsLoading(true); // Inicia o estado de carregamento
+        setError(''); // Limpa erros anteriores
+
+        const loginData = { email, password };
+
+        try {
+            const response = await fetch('http://localhost:3001/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginData),
+            });
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                throw new Error(responseData.message || 'Falha ao fazer login.');
+            }
+            
+            localStorage.setItem('authToken', responseData.token);
+            navigate('/mapa');
+
+        } catch (error: any) {
+            console.error('Erro no login:', error);
+            // Define a mensagem de erro para ser exibida na tela
+            setError(error.message);
+        } finally {
+            // Garante que o estado de carregamento termine, mesmo se houver erro
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -35,6 +71,7 @@ export default function LoginPage() {
                 </div>
                 
                 <form onSubmit={handleSubmit}>
+                    {/* Campos de input (sem alteração na estrutura) */}
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <i className="fas fa-envelope input-icon"></i>
@@ -47,7 +84,6 @@ export default function LoginPage() {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-
                     <div className="input-group">
                         <label htmlFor="password">Senha</label>
                         <i className="fas fa-lock input-icon"></i>
@@ -64,7 +100,6 @@ export default function LoginPage() {
                             onClick={() => setShowPassword(!showPassword)}
                         ></i>
                     </div>
-
                     <div className="options-group">
                         <div className="remember-me">
                             <input type="checkbox" id="remember" name="remember" />
@@ -73,7 +108,13 @@ export default function LoginPage() {
                         <Link to="/esqueceu-senha">Esqueceu a senha?</Link>
                     </div>
 
-                    <button type="submit" className="cta-button login-button">Entrar</button>
+                    {/* Renderização condicional da mensagem de erro */}
+                    {error && <p className="error-message">{error}</p>}
+
+                    {/* Botão com estado de carregamento */}
+                    <button type="submit" className="cta-button login-button" disabled={isLoading}>
+                        {isLoading ? 'Entrando...' : 'Entrar'}
+                    </button>
 
                     <div className="signup-link">
                         <p>Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link></p>

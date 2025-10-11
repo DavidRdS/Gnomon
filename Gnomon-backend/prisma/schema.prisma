@@ -1,0 +1,81 @@
+// Fonte de dados: agora PostgreSQL, lendo a URL do .env
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // Se você vier a usar Prisma/Accelerate (Data Proxy), descomente a linha abaixo
+  // e defina DIRECT_DATABASE_URL no .env apontando para o Postgres real:
+  // directUrl = env("DIRECT_DATABASE_URL")
+}
+
+// Gera o client do Prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Modelo para os Usuários do aplicativo
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  name     String
+  password String
+
+  // Campos para reset de senha
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([passwordResetToken])
+  @@map("usuarios")
+}
+
+// Modelo para os Locais (salas, banheiros, laboratórios, etc.)
+model Local {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String? // O '?' indica que este campo é opcional
+  coordinates String // Ex: "-8.3027, -35.9912"
+  type        String // Ex: "Sala de Aula", "Banheiro", "Laboratório"
+  iconUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relação: Um local pertence a um mapa
+  mapId Int
+  map   Map @relation(fields: [mapId], references: [id])
+
+  // Relação: Um local pode estar em várias rotas (muitos-para-muitos implícito)
+  routes Route[]
+
+  @@map("locais")
+}
+
+// Modelo para os Mapas (planta dos andares)
+model Map {
+  id        Int      @id @default(autoincrement())
+  name      String // Ex: "1º Andar - Bloco A"
+  imageUrl  String // URL da imagem da planta baixa
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relação: Um mapa contém vários locais
+  locals Local[]
+
+  @@map("mapas")
+}
+
+// Modelo para as Rotas (caminhos que conectam os locais)
+model Route {
+  id        Int      @id @default(autoincrement())
+  name      String
+  // Para simplificar, armazenamos os pontos da rota como texto JSON
+  pathData  String // Ex: "[[-8.302, -35.991], [-8.303, -35.992]]"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relação: Uma rota é composta por vários locais (muitos-para-muitos implícito)
+  locals Local[]
+
+  @@map("rotas")
+}
