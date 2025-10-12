@@ -1,5 +1,5 @@
 // src/App.tsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from './pages/Intro/Intro';
 import LoginPage from './pages/Login/LoginPage';
@@ -12,34 +12,26 @@ import RedefinirSenhaPage from './pages/RedefinirSenha/RedefinirSenha';
 function App() {
   return (
     <BrowserRouter>
-      {/* O componente <Routes> gerencia qual rota será exibida */}
       <Routes>
-        {/* 2. Define cada rota e o componente que ela deve renderizar */}
-
-        {/* Rota principal (página inicial) */}
         <Route path="/" element={<HomePage />} />
-        
-        {/* Rota para a página de login */}
-        <Route path="/login" element={<LoginPage />} />
-        
-        {/* Rota para a página de cadastro */}
-        <Route path="/cadastro" element={<CadastroPage />} />
-        
-        {/* Rota para a página do mapa */}
-        <Route path="/mapa" element={<MapaPage />} />
 
-        {/* Rota para a página de perfil */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/cadastro" element={<CadastroPage />} />
+        <Route path="/mapa" element={<MapaPage />} />
         <Route path="/perfil" element={<PerfilPage />} />
 
-        {/* Rota para a página de esqueceu senha */}
+        {/* Esqueci a senha */}
         <Route path="/esqueceu-senha" element={<EsqueceuSenhaPage />} />
 
-        {/* Rota para a página de redefinir senha */}
-        <Route path="/RedefinirSenha" element={<RedefinirSenhaPage />} />
-
-        {/* Rota para a página de redefinir senha (alias) */}
+        {/* Redefinir senha (dois caminhos válidos) */}
+        <Route path="/redefinir-senha" element={<RedefinirSenhaPage />} />
         <Route path="/reset-password" element={<RedefinirSenhaPage />} />
 
+        {/* Compat: redireciona o caminho antigo com maiúscula */}
+        <Route path="/RedefinirSenha" element={<Navigate to="/redefinir-senha" replace />} />
+
+        {/* 404 opcional */}
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </BrowserRouter>
   );
